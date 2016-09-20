@@ -1,0 +1,23 @@
+---
+format_version: 1.2.0
+default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
+trigger_map:
+workflows:
+  build_sln:
+    steps:
+    - script:
+        inputs:
+        - content: |-
+            #!/bin/bash
+            set -e
+            set -x
+            xbuild /p:Configuration=Release /p:Platform=iPhone /p:BuildIpa=true /target:Build xbuildreference.sln
+  build_ios_csproj:
+    steps:
+    - script:
+        inputs:
+        - content: |-
+            #!/bin/bash
+            set -e
+            set -x
+            xbuild /p:Configuration=Release /p:Platform=iPhone /p:BuildIpa=true /target:Build iOS/xbuildreference.iOS.csproj
